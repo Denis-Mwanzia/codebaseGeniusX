@@ -1,0 +1,21 @@
+# Jac Language Runtime
+jaseci>=1.4.12.0
+
+# AI and Gemini
+google-generativeai>=0.3.0
+
+# Git operations
+GitPython>=3.1.40
+
+# Code parsing
+tree-sitter>=0.20.4
+tree-sitter-python>=0.20.4
+
+# FastAPI backend
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-dotenv>=1.0.0
+
+# Frontend dependencies (will be installed via npm)
+# Listed here for reference
+
