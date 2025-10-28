@@ -32,17 +32,18 @@ class FileUtils:
             
             # Check if already cloned
             if (repo_dir / '.git').exists():
-                print(f"Repository already exists at {repo_dir}")
+                print(f"🎯 Found existing treasure cache at {repo_dir}! Using cached gold... 💰")
                 return str(repo_dir)
             
             # Clone repository
-            print(f"Cloning {github_url} to {repo_dir}")
+            print(f"🚀 Teleporting code from {github_url} to our secret base... 🏗️")
             git.Repo.clone_from(github_url, str(repo_dir), depth=1)
+            print(f"✨ Code successfully materialized! Welcome to the digital realm! 🌟")
             
             return str(repo_dir)
         
         except Exception as e:
-            print(f"Error cloning repository: {e}")
+            print(f"💥 Oops! The teleportation device malfunctioned: {e} 🔧")
             return None
     
     def cleanup_repository(self, repo_path: str):
@@ -53,26 +54,29 @@ class FileUtils:
             if not repo_dir.exists():
                 return
             
-            print(f"Cleaning up repository at {repo_dir}")
+            print(f"🧹 Marie Kondo mode activated! Tidying up at {repo_dir}... ✨")
             
-            # Files to keep
+            # Files to keep - our precious artifacts!
             keep_files = ['docs.md', 'diagram.mmd', 'code_graph.json', 'file_tree.json']
             
             # Remove everything except keep_files
             for item in repo_dir.iterdir():
                 if item.name in keep_files:
+                    print(f"💎 Keeping precious artifact: {item.name}")
                     continue
                 
                 if item.is_file():
+                    print(f"🗑️ Farewell, {item.name}! Thanks for your service!")
                     item.unlink()
                 elif item.is_dir():
+                    print(f"📁 Removing directory {item.name} and all its secrets...")
                     # Remove all directories
                     shutil.rmtree(item, ignore_errors=True)
             
-            print(f"Repository cleaned up, kept only generated docs")
-        
+            print(f"🎉 Repository spa treatment complete! Only the finest docs remain! 💅")
+            
         except Exception as e:
-            print(f"Error cleaning up repository: {e}")
+            print(f"💥 Cleanup crew encountered a snag: {e} 🔧")
     
     def build_file_tree(self, repo_path: str, max_depth: int = 4) -> Dict[str, Any]:
         """Build a tree representation of the repository"""
@@ -236,7 +240,7 @@ class FileUtils:
         with open(doc_file, 'w', encoding='utf-8') as f:
             f.write(documentation)
         
-        print(f"Documentation saved to {doc_file}")
+        print(f"📚 Epic documentation saga saved to {doc_file}! A masterpiece is born! ✨")
         return str(doc_file)
     
     def save_file_tree(self, file_tree: Dict[str, Any], repo_name: str, output_dir: str = "outputs"):
@@ -248,7 +252,7 @@ class FileUtils:
         with open(file_tree_json, 'w', encoding='utf-8') as f:
             json.dump(file_tree, f, indent=2)
         
-        print(f"File tree saved to {file_tree_json}")
+        print(f"🌳 Digital forest map saved to {file_tree_json}! Every branch documented! 🍃")
         return str(file_tree_json)
     
     def save_code_graph(self, code_graph: Dict[str, Any], repo_name: str, output_dir: str = "outputs"):
@@ -260,7 +264,7 @@ class FileUtils:
         with open(code_graph_json, 'w', encoding='utf-8') as f:
             json.dump(code_graph, f, indent=2)
         
-        print(f"Code graph saved to {code_graph_json}")
+        print(f"🧠 Neural network of code relationships saved to {code_graph_json}! The matrix is complete! 🔗")
         return str(code_graph_json)
     
     def save_diagram(self, diagram_content: str, repo_name: str, output_dir: str = "outputs"):
@@ -272,6 +276,6 @@ class FileUtils:
         with open(diagram_file, 'w', encoding='utf-8') as f:
             f.write(diagram_content)
         
-        print(f"Diagram saved to {diagram_file}")
+        print(f"🎨 Architectural masterpiece saved to {diagram_file}! Mona Lisa of code diagrams! 🖼️")
         return str(diagram_file)
 

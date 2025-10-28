@@ -36,7 +36,7 @@ Provide a concise summary of what this project does."""
             response = self.model.generate_content(prompt)
             return response.text
         except Exception as e:
-            print(f"Gemini API error: {e}")
+            print(f"🤖 Gemini AI is taking a coffee break: {e} ☕")
             # Fallback to simple summary
             return f"This project is described in the README. The README contains {len(readme_content)} characters."
     
@@ -109,7 +109,7 @@ Use the exact format shown above. Be professional, clear, and concise."""
             response = self.model.generate_content(prompt)
             return response.text
         except Exception as e:
-            print(f"Gemini API error: {e}")
+            print(f"🤖 Gemini AI is taking a coffee break: {e} ☕")
             # Return enhanced fallback documentation
             code_graph = context.get('code_graph', {})
             file_tree = context.get('file_tree', {})

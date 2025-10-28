@@ -58,7 +58,7 @@ class CodeParser:
             except Exception as e:
                 print(f"Error parsing {py_file}: {e}")
                 continue
-    
+        
     def _parse_javascript_files(self, repo_path_obj: Path, repo_path: str, graph: Dict):
         """Parse JavaScript files"""
         # Parse .js files
@@ -127,10 +127,19 @@ class CodeParser:
                 continue
             
             try:
-                print(f"Parsing TSX file: {tsx_file}")
+                print(f"🔬 Analyzing React+TypeScript magic in: {tsx_file}")
                 module_data = self._parse_typescript_file(tsx_file, repo_path_obj)
                 if module_data:
-                    print(f"Found module: {module_data['id']} with {len(module_data.get('components', []))} components")
+                    components_count = len(module_data.get('components', []))
+                    functions_count = len(module_data.get('functions', []))
+                    classes_count = len(module_data.get('classes', []))
+                    
+                    if components_count > 0:
+                        print(f"🎭 Discovered {components_count} React components - the stars of the show!")
+                    if functions_count > 0:
+                        print(f"⚙️ Found {functions_count} functions - the hardworking crew!")
+                    if classes_count > 0:
+                        print(f"🏛️ Spotted {classes_count} classes - the architectural masterpieces!")
                     module_id = module_data['id']
                     graph['modules'][module_id] = module_data
                     graph['nodes'].extend(module_data['classes'])
