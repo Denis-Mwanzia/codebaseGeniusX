@@ -195,7 +195,7 @@ MIT License
 
 ## 🏆 Assignment 2
 
-**Course:** Advanced Software Engineering  
+**Course:** Generative AI Training  
 **Student:** Denis Mwanzia  
 **Repository:** [https://github.com/Denis-Mwanzia/codebaseGeniusX.git](https://github.com/Denis-Mwanzia/codebaseGeniusX.git)
 
