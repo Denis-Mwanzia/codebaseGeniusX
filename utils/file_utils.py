@@ -27,13 +27,15 @@ class FileUtils:
             repo_name = f"{path_parts[-2]}_{path_parts[-1]}"
             repo_dir = Path(output_dir) / repo_name
             
+            # Auto-cleanup: Remove existing directory if it exists
+            if repo_dir.exists():
+                print(f"🧹 Found existing files at {repo_dir}. Auto-cleaning for fresh start... ✨")
+                import shutil
+                shutil.rmtree(repo_dir, ignore_errors=True)
+                print(f"🗑️ Previous files cleared! Ready for fresh teleportation! 🚀")
+            
             # Create output directory
             repo_dir.mkdir(parents=True, exist_ok=True)
-            
-            # Check if already cloned
-            if (repo_dir / '.git').exists():
-                print(f"🎯 Found existing treasure cache at {repo_dir}! Using cached gold... 💰")
-                return str(repo_dir)
             
             # Clone repository
             print(f"🚀 Teleporting code from {github_url} to our secret base... 🏗️")

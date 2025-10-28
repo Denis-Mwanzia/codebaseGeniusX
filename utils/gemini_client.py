@@ -373,46 +373,122 @@ This codebase represents more than just functional software—it's a digital nar
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     def generate_diagram(self, code_graph: Dict[str, Any], file_tree: Dict[str, Any]) -> str:
-        """Generate Mermaid diagram from code graph"""
+        """🎨 Generate a creative and visually stunning Mermaid diagram from code graph"""
         nodes = code_graph.get('nodes', [])
         modules = code_graph.get('modules', {})
+        language_stats = code_graph.get('language_stats', {})
         
-        # Group nodes by module
+        # Group nodes by type for better visualization
         components = [n for n in nodes if n.get('type') == 'component']
         classes = [n for n in nodes if n.get('type') == 'class']
         functions = [n for n in nodes if n.get('type') == 'function']
         
-        diagram = "graph TD\n"
-        
-        # Add main project node
+        # Start with creative diagram structure
         project_name = file_tree.get('name', 'Project')
-        diagram += f"    A[{project_name}] --> B[Modules]\n"
+        diagram_lines = [
+            "graph TD",
+            f"    A[🚀 {project_name}] --> B[📦 Architecture Hub]",
+            "    B --> C[⚙️ Function Galaxy]",
+            "    B --> D[🏛️ Class Cosmos]",
+            "    B --> E[🧩 Component Universe]",
+            ""
+        ]
         
-        # Add module nodes (limit to top 10)
-        module_items = list(modules.items())[:10]
-        for i, (module_id, module_info) in enumerate(module_items):
-            diagram += f"    B --> M{i}[{module_info.get('path', module_id)}]\n"
+        # Add language ecosystem if available
+        if language_stats:
+            diagram_lines.extend([
+                "    A --> F[🌐 Language Ecosystem]"
+            ])
+            node_letter = ord('G')
+            for lang, count in list(language_stats.items())[:4]:  # Limit to 4 languages
+                letter = chr(node_letter)
+                emoji = self._get_language_emoji(lang)
+                diagram_lines.append(f"    F --> {letter}[{emoji} {lang}: {count} files]")
+                node_letter += 1
+            diagram_lines.append("")
         
-        # Add component/class/function nodes if we have them
+        # Add top modules with creative names
+        if modules:
+            diagram_lines.extend([
+                "    B --> H[📁 Module Network]"
+            ])
+            node_letter = ord('I')
+            for i, (module_id, module_info) in enumerate(list(modules.items())[:5]):
+                letter = chr(node_letter + i)
+                module_name = module_info.get('path', module_id).split('/')[-1]
+                clean_name = module_name.replace('_', ' ').replace('.py', '').replace('.js', '').replace('.ts', '').title()
+                emoji = self._get_module_emoji(module_name)
+                diagram_lines.append(f"    H --> {letter}[{emoji} {clean_name}]")
+            diagram_lines.append("")
+        
+        # Add entity counts with visual appeal
         if components:
-            diagram += f"    B --> C[Components: {len(components)}]\n"
-        
+            diagram_lines.append(f"    E --> EC[🎭 {len(components)} React Components]")
         if classes:
-            diagram += f"    B --> D[Classes: {len(classes)}]\n"
-        
+            diagram_lines.append(f"    D --> DC[🏗️ {len(classes)} Class Structures]")
         if functions:
-            diagram += f"    B --> E[Functions: {len(functions)}]\n"
+            diagram_lines.append(f"    C --> FC[⚡ {len(functions)} Function Powers]")
         
-        # Add styling
-        diagram += """    
-    style A fill:#ff6b6b
-    style B fill:#4ecdc4
-    style C fill:#95e1d3
-    style D fill:#fce38a
-    style E fill:#f38181
-"""
+        # Add creative styling with The Intelligent Crew's touch
+        diagram_lines.extend([
+            "",
+            "    %% 🎨 The Intelligent Crew's Creative Styling",
+            "    style A fill:#ff6b6b,stroke:#333,stroke-width:4px,color:#fff",
+            "    style B fill:#4ecdc4,stroke:#333,stroke-width:3px,color:#fff", 
+            "    style C fill:#95e1d3,stroke:#333,stroke-width:2px,color:#333",
+            "    style D fill:#fce38a,stroke:#333,stroke-width:2px,color:#333",
+            "    style E fill:#f38181,stroke:#333,stroke-width:2px,color:#fff",
+            "    style F fill:#a8e6cf,stroke:#333,stroke-width:2px,color:#333",
+            "    style H fill:#dda0dd,stroke:#333,stroke-width:2px,color:#333",
+            "",
+            "    %% ✨ Add visual flair and personality",
+            "    classDef moduleClass fill:#e8f4fd,stroke:#1e88e5,stroke-width:2px,color:#333",
+            "    classDef langClass fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#333",
+            "    classDef entityClass fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,color:#333",
+            "",
+            "    %% 🌟 Apply creative classes",
+            "    class EC,DC,FC entityClass"
+        ])
         
-        return diagram
+        return "\n".join(diagram_lines)
+    
+    def _get_language_emoji(self, language: str) -> str:
+        """Get emoji for programming language"""
+        emoji_map = {
+            'Python': '🐍',
+            'JavaScript': '⚡',
+            'TypeScript': '💙',
+            'React': '⚛️',
+            'HTML': '🌐',
+            'CSS': '🎨',
+            'Java': '☕',
+            'C++': '⚙️',
+            'Go': '🐹',
+            'Rust': '🦀'
+        }
+        return emoji_map.get(language, '📄')
+    
+    def _get_module_emoji(self, module_name: str) -> str:
+        """Get emoji for module based on name"""
+        name_lower = module_name.lower()
+        if 'api' in name_lower or 'server' in name_lower:
+            return '🌐'
+        elif 'test' in name_lower:
+            return '🧪'
+        elif 'util' in name_lower or 'helper' in name_lower:
+            return '🔧'
+        elif 'config' in name_lower or 'setting' in name_lower:
+            return '⚙️'
+        elif 'model' in name_lower or 'data' in name_lower:
+            return '📊'
+        elif 'view' in name_lower or 'component' in name_lower:
+            return '🎭'
+        elif 'auth' in name_lower or 'security' in name_lower:
+            return '🔐'
+        elif 'db' in name_lower or 'database' in name_lower:
+            return '🗄️'
+        else:
+            return '📦'
     
     def _generate_overview(self, languages: List[str], framework: str) -> str:
         """Generate a creative and contextual overview"""
