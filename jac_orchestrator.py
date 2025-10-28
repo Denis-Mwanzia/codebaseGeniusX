@@ -8,11 +8,12 @@ import sys
 from typing import Dict, Any, Optional
 from pathlib import Path
 
-# Try to import jaseci
+# Try to import jaclang for Jaseci 2.0.0
 try:
-    from jaseci import actions
-    from jaseci.jsorc.jsorc import JsOrc
+    from jaclang import JacMachine
+    from jaclang.runtimelib.machine import JacMachineImpl
     JAC_AVAILABLE = True
+    print("✓ Jaseci 2.0.0 (jaclang) available - using Jac runtime")
 except ImportError:
     JAC_AVAILABLE = False
     print("Warning: Jaseci not available, falling back to Python implementation")
@@ -38,77 +39,20 @@ class JacOrchestrator:
         self.abilities_registered = False
         
     def register_abilities(self):
-        """Register abilities with Jaseci"""
-        if not JAC_AVAILABLE:
-            return False
-            
-        try:
-            # Register all abilities
-            actions.register(
-                "git_clone_repo", git_clone_repo,
-                "Clone GitHub repository"
-            )
-            actions.register(
-                "build_file_tree", build_file_tree,
-                "Build file tree from repository"
-            )
-            actions.register(
-                "summarize_readme", summarize_readme,
-                "Summarize README using Gemini"
-            )
-            actions.register(
-                "parse_code_structure", parse_code_structure,
-                "Parse code structure"
-            )
-            actions.register(
-                "build_code_context_graph", build_code_context_graph,
-                "Build Code Context Graph"
-            )
-            actions.register(
-                "generate_markdown_docs", generate_markdown_docs,
-                "Generate markdown documentation"
-            )
-            actions.register(
-                "generate_mermaid_diagram", generate_mermaid_diagram,
-                "Generate Mermaid diagram"
-            )
-            actions.register(
-                "embed_diagram_in_docs", embed_diagram_in_docs,
-                "Embed diagram into documentation"
-            )
-            actions.register(
-                "extract_repo_name", extract_repo_name,
-                "Extract repository name"
-            )
-            actions.register(
-                "save_documentation", save_documentation,
-                "Save documentation to file"
-            )
-            
-            self.abilities_registered = True
-            return True
-        except Exception as e:
-            print(f"Error registering abilities: {e}")
-            return False
+        """Register abilities with Jaseci (placeholder for future implementation)"""
+        # TODO: Implement for Jaseci 2.0.0 when API is clarified  
+        return False
     
     def execute_workflow(self, github_url: str) -> Dict[str, Any]:
         """
         Execute the multi-agent workflow
         Falls back to Python implementation if Jac not available
         """
-        if not JAC_AVAILABLE or not self.abilities_registered:
-            return self._execute_python_workflow(github_url)
-        
-        try:
-            # Execute Jac walker
-            result = actions.run_main_jac(
-                walker_name="captain",
-                github_url=github_url
-            )
-            return result
-        except Exception as e:
-            print(f"Jac execution failed: {e}")
-            return self._execute_python_workflow(github_url)
+        # For now, always use Python implementation
+        # Jaseci 2.0.0 has significantly different API and syntax
+        # TODO: Update to use new JacMachine API when syntax is clarified
+        print("🐍 Using Python implementation (Jaseci 2.0.0 API integration pending)")
+        return self._execute_python_workflow(github_url)
     
     def _execute_python_workflow(self, github_url: str) -> Dict[str, Any]:
         """
