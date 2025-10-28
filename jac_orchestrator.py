@@ -59,29 +59,29 @@ class JacOrchestrator:
         Python implementation of the workflow
         This is what currently works
         """
-        print("🧭 Captain: Starting mission (Python mode)")
+        print("🧭 Captain: All hands on deck! Initiating code exploration mission... ⚓")
         
         # Step 1: Clone repository
-        print("🗺️ Navigator: Cloning repository...")
+        print("🗺️ Navigator: Charting course to digital treasure... 🏴‍☠️")
         repo_path = self.file_utils.clone_repository(github_url)
         if not repo_path:
-            raise Exception("Failed to clone repository")
+            raise Exception("💥 Houston, we have a problem! Repository clone failed")
         
         # Step 2: Build file tree
-        print("🗺️ Navigator: Building file tree...")
+        print("🗺️ Navigator: Mapping the digital landscape... 🗾")
         file_tree = self.file_utils.build_file_tree(repo_path)
         
         # Step 3: Summarize README
-        print("🗺️ Navigator: Summarizing README...")
+        print("🗺️ Navigator: Deciphering ancient README scrolls... 📜")
         readme_content = self.file_utils.get_readme(repo_path)
         readme_summary = self.gemini.summarize_readme(readme_content)
         
         # Step 4: Build code graph
-        print("🔍 Inspector: Analyzing code structure...")
+        print("🔍 Inspector: CSI: Code Scene Investigation in progress... 🕵️‍♂️")
         code_graph = self.parser.build_code_context_graph(repo_path)
         
         # Step 5: Generate documentation
-        print("✍️ Author: Writing documentation...")
+        print("✍️ Author: Weaving tales of code and glory... 📚✨")
         context = {
             'code_graph': code_graph,
             'file_tree': file_tree,
@@ -91,11 +91,11 @@ class JacOrchestrator:
         documentation = self.gemini.generate_documentation(context)
         
         # Step 6: Generate diagram
-        print("🎨 Designer: Creating diagrams...")
+        print("🎨 Designer: Painting digital masterpieces... 🎭")
         diagram = self.gemini.generate_diagram(code_graph, file_tree)
         
         # Step 7: Save all files
-        print("🎨 Designer: Saving files...")
+        print("🎨 Designer: Preserving artifacts in the digital vault... 💎")
         repo_name = os.path.basename(repo_path)
         doc_path = self.file_utils.save_documentation(documentation, repo_name)
         file_tree_path = self.file_utils.save_file_tree(file_tree, repo_name)
@@ -103,10 +103,10 @@ class JacOrchestrator:
         diagram_path = self.file_utils.save_diagram(diagram, repo_name)
         
         # Step 8: Cleanup cloned repository
-        print("🧹 Cleaning up cloned repository...")
+        print("🧹 Janitor: Making everything sparkle and shine... ✨")
         self.file_utils.cleanup_repository(repo_path)
         
-        print("✅ Mission complete!")
+        print("🎉 Mission accomplished! The Intelligent Crew strikes again! 🚀")
         
         return {
             "status": "success",
