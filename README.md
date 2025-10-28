@@ -128,26 +128,40 @@ codebaseGeniusX/
 - ✅ **React frontend** with real-time progress tracking
 - ✅ **REST API** for easy integration
 - ✅ **Automatic Repository Cleanup**: Keeps only generated documentation files
+- ✨ **Creative User Experience**: Engaging, story-driven console output and documentation
+- 🎭 **Personality-Driven Agents**: Each agent has unique voice and character
+- 🎪 **Visual Documentation**: Enhanced with badges, emojis, and storytelling elements
 
 ## 📊 Output Example
 
 The system generates four files in `outputs/[repo-name]/`:
 
-- **`docs.md`** - Comprehensive Markdown documentation with:
-  - Project overview and installation instructions
-  - Repository structure
-  - Code summary with functions, classes, and components
-  - Dependencies list
-  - Architecture diagram
+- **`docs.md`** - Creative Markdown documentation with:
+  - 🎨 Stylish headers with badges and visual elements
+  - 🌟 "Project Spotlight" with storytelling approach
+  - 🏗️ "Architecture Landscape" with emoji file tree
+  - 🔮 "AI-Powered Insights" with smart recommendations
+  - 🎭 "The Story Behind The Code" narrative conclusion
+  - 🏆 "Hall of Fame" crediting The Intelligent Crew
   
 - **`code_graph.json`** - Structured code analysis:
   - Extracted functions, classes, and React components
-  - Module relationships
-  - Language statistics
+  - Module relationships and dependencies
+  - Language statistics and framework detection
   
 - **`file_tree.json`** - Complete repository structure with metadata
 
 - **`diagram.mmd`** - Mermaid diagram showing module relationships
+
+### 🎪 Creative Console Experience
+
+Watch The Intelligent Crew in action with engaging messages:
+- 🧭 **Captain**: "All hands on deck! Initiating code exploration mission..."
+- 🗺️ **Navigator**: "Charting course to digital treasure..."
+- 🔍 **Inspector**: "CSI: Code Scene Investigation in progress..."
+- ✍️ **Author**: "Weaving tales of code and glory..."
+- 🎨 **Designer**: "Painting digital masterpieces..."
+- 🧹 **Janitor**: "Marie Kondo mode activated! Tidying up..."
 
 ## 🧠 Tech Stack
 
